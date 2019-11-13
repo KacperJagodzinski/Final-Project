@@ -1,13 +1,22 @@
 package org.kacperjagodzinski.finalproject.walk;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.sql.Date;
+
+@Entity
+@Setter
+@Getter
+@Table(name="walks")
 public class Walk {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dateTime;
-    private String where;
-    private Long userId;
-    private Long dogId;
 
+    private Date date;
+
+    private String place;
 
 }
