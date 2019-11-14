@@ -23,7 +23,7 @@
     <tbody>
     <c:forEach items="${userWalks}" var="walks">
         <tr>
-            <td>${walks.date}</td>
+            <td>${walks.datetime}</td>
             <td>${walks.place}</td>
             <td>
                 <a class="btn btn-primary" href="/walk/edit/${walks.id}">Edit</a>

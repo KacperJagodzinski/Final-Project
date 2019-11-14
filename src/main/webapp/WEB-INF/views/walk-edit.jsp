@@ -16,8 +16,10 @@
 
     </label></br>
     <label>Data:
-        <form:input type="date" path="date" />
+        <form:input path="datetimeString" type="datetime-local"/>
+        <form:errors path="datetime"/>
     </label>
+    <form:hidden path="ifActive"/>
     <input type="submit" value="edit"/>
 </form:form>
 

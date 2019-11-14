@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Range;
 import org.kacperjagodzinski.finalproject.rase.Rase;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Getter
 @Setter
@@ -20,6 +21,7 @@ public class Dog {
 
     private String gender;
 
+    @Min(0)
     private int age;
 
     private String description;

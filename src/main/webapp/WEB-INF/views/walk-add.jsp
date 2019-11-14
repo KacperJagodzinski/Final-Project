@@ -17,10 +17,10 @@
             <form:errors path="place"/>
         </label></br>
         <label>Data:
-            <form:input type="date" path="date" />
-            <form:errors path="date"/>
+            <form:input path="datetimeString" type="datetime-local"/>
+            <form:errors path="datetime"/>
         </label>
-<%--        <form:hidden path="user" />--%>
+        <form:hidden path="ifActive"/>
         <input type="submit" value="add"/>
     </form:form>
 </body>

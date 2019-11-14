@@ -2,6 +2,7 @@ package org.kacperjagodzinski.finalproject.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.tomcat.jni.Address;
 import org.kacperjagodzinski.finalproject.dog.Dog;
 import org.kacperjagodzinski.finalproject.walk.Walk;
 
@@ -34,10 +35,13 @@ public class User {
 
     @OneToMany
     @JoinColumn(name="id_user")
-    private List<Walk> walks =new ArrayList<>();
-
-    @OneToMany
-    @JoinColumn(name="id_user")
     private List<Dog> dogs =new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "users_walks",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "walk_id"))
+    private List<Walk> walks = new ArrayList<>();
+
 
 }

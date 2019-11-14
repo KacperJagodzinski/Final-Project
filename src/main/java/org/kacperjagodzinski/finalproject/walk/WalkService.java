@@ -31,8 +31,8 @@ public class WalkService {
         walkRepository.deleteById(id);
     }
 
-    public List<Walk> findUserWalks(Long id){return walkRepository.findUserWalks(id);}
-
     public List<Walk> findAllWalks(){return walkRepository.findAll();}
+
+    public List<Walk> findAllActiveWalks(){return walkRepository.findAllByIfActiveTrueOrderByDatetime();}
 
 }

@@ -21,7 +21,7 @@
         <form:errors path="gender"/>
     </label><br/>
     <label>Wiek:
-        <form:input path="age" type="number"/>
+        <form:input path="age" type="number" min="0"/>
         <form:errors path="age"/>
     </label><br/>
 

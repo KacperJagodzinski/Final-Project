@@ -1,5 +1,6 @@
 package org.kacperjagodzinski.finalproject.user;
 
+import org.kacperjagodzinski.finalproject.filter.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,7 @@ public class UserController {
                     "Passwords do not match"));
             return "user-register";
         }
+        user.setPassword(BCrypt.hashpw(user.getPassword(),BCrypt.gensalt()));
         userService.create(user);
         return "redirect:/user/login";
     }
@@ -63,7 +65,7 @@ public class UserController {
         User existingUser = userService.findFirstByEmail(user.getEmail());
         if (existingUser == null) {
             loggedIn = false;
-        } else if (!user.getPassword().equals(existingUser.getPassword())) {
+        } else if (!BCrypt.checkpw(user.getPassword(), existingUser.getPassword())) {
             loggedIn = false;
         }
 

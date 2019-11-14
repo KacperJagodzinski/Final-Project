@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/walk")
@@ -35,12 +39,14 @@ public class WalkController {
 
     @PostMapping("/add")
     public String addedWalk(@Valid Walk walk, BindingResult result,HttpSession session){
+        System.out.println("Datetime: " + walk.getDatetime());
         if(result.hasErrors()){
             return "walk-add";
         }
-        walkService.create(walk);
         Long id = (Long) session.getAttribute("id");
         User user = userService.findOne(id);
+        walk.setUser(user);
+        walkService.create(walk);
         List<Walk> walks = user.getWalks();
         walks.add(walk);
         userService.update(user);
@@ -65,8 +71,20 @@ public class WalkController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteWalk(@PathVariable Long id){
+    public String deleteWalk(@PathVariable Long id,HttpSession session){
+        Walk walk = walkService.findOne(id);
+        List<User> users = walk.getUsers();
+        for (User user:users
+             ) {
+            user.getWalks().remove(walkService.findOne(id));
+            userService.update(user);
+        }
+
+        //walkService.update(walk);
         walkService.deleteOne(id);
+
+
+//        walkService.deleteOne(id);
         return "redirect:/walk/list";
     }
 
@@ -74,20 +92,30 @@ public class WalkController {
     public String listWalk(HttpSession session, Model model){
         Long id = (Long) session.getAttribute("id");
         User user = userService.findOne(id);
-        List<Walk> userWalks = user.getWalks();
+        List<Walk> walks = user.getWalks();
+        List<Walk> userWalks = walks.stream().filter(Walk::isIfActive)
+                .sorted(
+                        Comparator.comparing(Walk::getDatetime)
+        ).collect(Collectors.toList());
         model.addAttribute("userWalks", userWalks);
         return "walk-list";
     }
 
     @GetMapping("/alllist")
     public String listOfAllWalks(Model model){
-        List<Walk> walks = walkService.findAllWalks();
-        model.addAttribute("walks",walks);
+       List<Walk> walks = walkService.findAllActiveWalks();
+       model.addAttribute("walks",walks);
         return "walk-list-all";
     }
 
     @GetMapping("/join/{id}")
-    public String joinWalk(){
-        return "redirect:walk-list-all";
+    public String joinWalk(@PathVariable Long id,HttpSession session){
+        Long userId = (Long) session.getAttribute("id");
+        User user = userService.findOne(userId);
+        Walk walk = walkService.findOne(id);
+        List<Walk> walks = user.getWalks();
+        walks.add(walk);
+        userService.update(user);
+        return "redirect:/walk/alllist";
     }
 }

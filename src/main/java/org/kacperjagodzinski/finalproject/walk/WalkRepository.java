@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 public interface WalkRepository extends JpaRepository<Walk,Long> {
 
-    @Query("select w from Walk w where user_id=?1")
-    public List<Walk> findUserWalks(Long id);
+    public List<Walk> findAllByIfActiveTrueOrderByDatetime();
+
 }
