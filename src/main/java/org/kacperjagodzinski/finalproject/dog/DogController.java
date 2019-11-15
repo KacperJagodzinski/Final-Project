@@ -4,7 +4,6 @@ import org.kacperjagodzinski.finalproject.rase.Rase;
 import org.kacperjagodzinski.finalproject.rase.RaseService;
 import org.kacperjagodzinski.finalproject.user.User;
 import org.kacperjagodzinski.finalproject.user.UserService;
-import org.kacperjagodzinski.finalproject.walk.Walk;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,6 +52,9 @@ public class DogController {
     @GetMapping("/list")
     public String listOfDogs(Model model, HttpSession session){
         Long id = (Long) session.getAttribute("id");
+        if(id==null){
+            return "redirect:/user/login";
+        }
         User user = userService.findOne(id);
         List<Dog> dogs = user.getDogs();
         model.addAttribute("dogs",dogs);

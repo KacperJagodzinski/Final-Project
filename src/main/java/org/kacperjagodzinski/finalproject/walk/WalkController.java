@@ -39,7 +39,6 @@ public class WalkController {
 
     @PostMapping("/add")
     public String addedWalk(@Valid Walk walk, BindingResult result,HttpSession session){
-        System.out.println("Datetime: " + walk.getDatetime());
         if(result.hasErrors()){
             return "walk-add";
         }
@@ -79,18 +78,16 @@ public class WalkController {
             user.getWalks().remove(walkService.findOne(id));
             userService.update(user);
         }
-
-        //walkService.update(walk);
         walkService.deleteOne(id);
-
-
-//        walkService.deleteOne(id);
         return "redirect:/walk/list";
     }
 
     @GetMapping("/list")
     public String listWalk(HttpSession session, Model model){
         Long id = (Long) session.getAttribute("id");
+        if(id==null){
+            return "redirect:/user/login";
+        }
         User user = userService.findOne(id);
         List<Walk> walks = user.getWalks();
         List<Walk> userWalks = walks.stream().filter(Walk::isIfActive)

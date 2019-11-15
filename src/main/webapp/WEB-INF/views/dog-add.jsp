@@ -3,43 +3,48 @@
 <html>
 <head>
     <title>Title</title>
+    <jsp:include page="bootstrap.jsp"/>
 </head>
 <body>
-<h1>Add a dog</h1>
-<form:form modelAttribute="dog" method="post">
-    <label>
-        <form:hidden path="id"/>
-    </label><br/>
-    <label>Imię:
-        <form:input path="name"/>
-        <form:errors path="name"/>
-    </label><br/>
-    <label>Płeć:
-        <form:select path="gender">
-        <form:options items="${gender}"/>
-        </form:select>
-        <form:errors path="gender"/>
-    </label><br/>
-    <label>Wiek:
-        <form:input path="age" type="number" min="0"/>
-        <form:errors path="age"/>
-    </label><br/>
+<jsp:include page="header.jsp"/>
 
-        <form:hidden path="rating"/>
-    <form:errors path="rating"/>
-
-    <label>Opis zachowań:
-        <form:input path="description"/>
-        <form:errors path="description"/>
-    </label><br>
-    <label>Rasa:
-        <form:select itemValue="id" itemLabel="name"
-                     path="rase.id" items="${rases}"/>
-        <form:errors path="rase"/>
-    </label><br/>
-
-    <input type="submit" value="dodaj">
-</form:form>
-
+<section class="dashboard-section">
+    <div class="container pt-4 pb-4">
+        <div class="border-dashed view-height">
+            <div class="container w-25">
+                <form:form method="post" modelAttribute="dog">
+                    <h1 class="text-color-darker" style="color: white">Dodawanie psa</h1>
+                    <form:hidden path="id"/>
+                    <div class="form-group">
+                        <form:input path="name" class="form-control" placeholder="imie"/>
+                        <form:errors path="name"/>
+                    </div>
+                    <div class="form-group">
+                        <form:select path="gender" class="form-control">
+                        <form:options items="${gender}"/>
+                        </form:select>
+                        <form:errors path="gender"/>
+                    </div>
+                    <div class="form-group" title="wiek" >
+                        <form:input path="age" type="number" min="0" class="form-control" title="wiek"  />
+                        <form:errors path="age"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input path="description" type="text" class="form-control" placeholder="opis zachowan"/>
+                        <form:errors path="description"/>
+                    </div>
+                    <div class="form-group">
+                        <form:select itemValue="id" itemLabel="name"
+                                     path="rase.id" items="${rases}" class="form-control"/>
+                        <form:errors path="rase"/>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Dodaj</button>
+                    </div>
+                </form:form>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

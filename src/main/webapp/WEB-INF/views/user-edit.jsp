@@ -7,36 +7,38 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<h1>Register</h1>
-<form:form method="post" modelAttribute="user">
-    <label>
-        <form:hidden path="id"/>
-    </label><br/>
-    <label> Name:
-        <form:input path="firstName"/>
-        <form:errors path="firstName"/>
-    </label><br/>
-    <label>Surname:
-        <form:input path="lastName"/>
-        <form:errors path="lastName"/>
-    </label><br/>
-    <label>Email:
-        <form:input path="email"/>
-        <form:errors path="email"/>
-    </label><br/>
+<section class="dashboard-section">
+    <div class="container pt-4 pb-4">
+        <div class="border-dashed view-height">
+            <div class="container w-25">
+                <form:form method="post" modelAttribute="user">
+                    <h1 style="color: white">Edit</h1>
+                        <form:hidden path="id"/>
+                    <div>
+                        <form:input path="firstName" class="form-control"/>
+                        <form:errors path="firstName"/>
+                    </div>
+                    <div>
+                        <form:input path="lastName" class="form-control"/>
+                        <form:errors path="lastName"/>
+                    </div>
+                    <div>
+                        <form:input path="email" class="form-control"/>
+                        <form:errors path="email"/>
+                    </div>
 
-        <form:hidden path="password"/>
+                        <form:hidden path="password"/>
 
-    <label>Description:
-        <form:input path="description"/>
-        <form:errors path="description"/>
-    </label><br/>
-    <label>
-        <form:hidden path="rating"/>
-    </label><br/>
-    <input type="submit" value="edit"><br/>
-</form:form>
-
-
+                    <div>
+                        <form:input path="description" class="form-control"/>
+                        <form:errors path="description"/>
+                    </div>
+                        <form:hidden path="rating"/>
+                    <input type="submit" value="edit"><br/>
+                </form:form>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

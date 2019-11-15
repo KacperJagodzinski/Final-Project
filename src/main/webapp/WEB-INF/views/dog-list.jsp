@@ -7,12 +7,12 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<h1>Your Dogs</h1>
+<h1 style="color: white">Your Dogs</h1>
 <div class="mt-1">
     <a href="/dog/add" class="btn btn-success">Dodaj</a>
 </div>
 <div class="mt-1">
-    <table class="table">
+    <table class="table" style="background-color: white;opacity: 0.8">
         <thead>
         <tr>
             <th scope="col">Name</th>

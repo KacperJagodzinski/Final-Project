@@ -7,12 +7,12 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<h1>List of your walks</h1>
+<h1 style="color: white">List of your walks</h1>
 <div class="mt-1">
     <a href="/walk/add" class="btn btn-success">Dodaj</a>
 </div>
 <div class="mt-1">
-<table class="table">
+<table class="table" style="background-color: white;opacity: 0.8">
     <thead>
     <tr>
         <th scope="col">Date</th>

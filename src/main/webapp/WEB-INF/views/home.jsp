@@ -4,10 +4,9 @@
 <head>
     <title>Title</title>
     <jsp:include page="bootstrap.jsp"/>
+    <jsp:include page="header.jsp"/>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
-
 
 </body>
 </html>
