@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+oglod<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <nav class="navbar navbar-expand-lg navbar navbar-dark">
     <a class="navbar-brand" href="/">Walk A Dog</a>
